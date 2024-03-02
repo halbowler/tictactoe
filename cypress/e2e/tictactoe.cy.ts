@@ -11,8 +11,12 @@ describe("Tic Tac Toe App", () => {
     }
 
     function validateBoard(size) {
+        // Validate correct number of cells equals size * size before iterating
         cy.get("#table td").its("length").should("eq", size * size)
-        cy.get("#table tr").its("length").should("eq", size)
+        cy.get("#table tr").each(($el, index, $list) => { 
+            // Validate each row has columns equal to size
+            cy.wrap($el).find("td").its("length").should("eq", size)
+        }).its("length").should("eq", size)  // Validate # of rows is equal to size
     }
 
     it("Displays an input form with a play button", () => {
