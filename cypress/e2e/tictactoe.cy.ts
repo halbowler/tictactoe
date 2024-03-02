@@ -53,6 +53,14 @@ describe("Tic Tac Toe App", () => {
         cy.get("#table td").eq(1).should("have.text", "O")
     })
 
+    it("Replaces current board with new board", () => {
+        // Known failure: appends rows to bottom of current table
+        createBoard(3)
+        cy.get("#number").clear()
+        createBoard(5)
+        validateBoard(5)
+    })
+
     it("Obeys simple win condition", () => {
         createBoard(3)
         // X O -
